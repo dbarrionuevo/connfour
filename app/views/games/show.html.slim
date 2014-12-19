@@ -1,0 +1,15 @@
+table.table.table-bordered
+  thead
+    tr
+      - 7.times do |column|
+        th = button_to "Put", user_games_path(user_id: current_user.id, column: column + 1)
+  tbody
+    - 6.times do |row|
+      tr
+        - 7.times do |column|
+          td
+            - if p1_game_presenter.disc_at?(row, column)
+              span =  image_tag("disc1.jpg")
+
+            - if p2_game_presenter.disc_at?(row, column)
+              span =  image_tag("disc2.jpg")
