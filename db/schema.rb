@@ -13,13 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20141219210557) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "games", force: true do |t|
     t.integer "user_id"
     t.integer "column"
     t.integer "row"
   end
 
-  add_index "games", ["user_id"], name: "index_games_on_user_id"
+  add_index "games", ["user_id"], name: "index_games_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.datetime "created_at"

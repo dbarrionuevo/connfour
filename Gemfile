@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Rails
 gem 'rails',                    '4.1.8'
-gem 'sqlite3'
+gem 'pg'
 gem "thin"
 gem "quiet_assets"
 
@@ -14,4 +14,9 @@ gem "jquery-rails"
 # Testing
 group :development, :test do
   gem 'rspec-rails'
+end
+
+group :assets do
+  gem 'therubyracer'
+  gem 'uglifier'
 end
