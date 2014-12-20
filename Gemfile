@@ -20,3 +20,5 @@ group :assets do
   gem 'therubyracer'
   gem 'uglifier'
 end
+
+gem 'rails_12factor', group: :production

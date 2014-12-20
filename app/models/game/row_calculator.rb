@@ -45,47 +45,20 @@ class Game::RowCalculator
   def win_by_diagional?
     @win = []
 
-    # Check all possible win combination starting at column 1
-    3.times do |start_r|
-      [1,2,3,4].each_with_index do |v,i|
-        @win << games.where(column: v).map(&:row).include?(6 - start_r - i)
-      end
+    # Check all possible win combination starting at each column
+    WIN_ROW_SERIES.each do |row_serie|
+      3.times do |start_r|
+        @win = []
+        row_serie.each_with_index do |v,i|
+          @win << games.where(column: v).map(&:row).include?(6 - start_r - i)
+        end
 
-      break true if @win.uniq == true
-      @win = []
+        break if @win.uniq == [true]
+      end
+      break if @win.uniq == [true]
     end
 
-    # Check all possible win combination starting at column 2
-    3.times do |start_r|
-      [2,3,4,5].each_with_index do |v,i|
-        @win << games.where(column: v).map(&:row).include?(6 - start_r - i)
-      end
-
-      break true if @win.uniq == true
-      @win = []
-    end
-
-    # Check all possible win combination starting at column 3
-    3.times do |start_r|
-      [3,4,5,6].each_with_index do |v,i|
-        @win << games.where(column: v).map(&:row).include?(6 - start_r - i)
-      end
-
-      break true if @win.uniq == true
-      @win = []
-    end
-
-    # Check all possible win combination starting at column 4
-    3.times do |start_r|
-      [4,5,6,7].each_with_index do |v,i|
-        @win << games.where(column: v).map(&:row).include?(6 - start_r - i)
-      end
-
-      break true if @win.uniq == true
-      @win = []
-    end
-
-    @win.uniq == true
+    return @win.uniq == [true]
   end
 
   def games
