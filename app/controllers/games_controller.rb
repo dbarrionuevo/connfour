@@ -18,6 +18,12 @@ class GamesController < ApplicationController
     redirect_to game_path(current_user.id)
   end
 
+  def restart
+    Game.destroy_all
+
+    redirect_to game_path(current_user.id)
+  end
+
   private
 
   def column

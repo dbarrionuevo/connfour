@@ -5,4 +5,6 @@ Rails.application.routes.draw do
     resources :games do
     end
   end
+
+  delete '/restart', to: 'games#restart', as: 'restart'
 end
