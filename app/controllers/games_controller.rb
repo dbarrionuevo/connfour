@@ -2,8 +2,7 @@ class GamesController < ApplicationController
   def show; end
 
   def create
-    column  = params[:column].to_i
-    row     = Game::RowCalculator.new(column).next_empty
+    row     = row_calculator.next_empty
 
     if row >= 1
       current_user.games.create(
@@ -12,10 +11,22 @@ class GamesController < ApplicationController
       )
     end
 
+    if row_calculator.win?
+      flash[:notice] = "You Won!"
+    end
+
     redirect_to game_path(current_user.id)
   end
 
   private
+
+  def column
+    @column  ||= params[:column].to_i
+  end
+
+  def row_calculator
+    @row_calculator ||= Game::RowCalculator.new(current_user, column)
+  end
 
   def p1_game_presenter
     @p1_game_presenter ||= GamePresenter.new(player_1.games)

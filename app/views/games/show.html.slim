@@ -11,5 +11,7 @@ table.table.table-bordered
             - if p1_game_presenter.disc_at?(row, column)
               span =  image_tag("disc1.jpg")
 
-            - if p2_game_presenter.disc_at?(row, column)
+            - elsif p2_game_presenter.disc_at?(row, column)
               span =  image_tag("disc2.jpg")
+            - else
+              span &nbsp;
